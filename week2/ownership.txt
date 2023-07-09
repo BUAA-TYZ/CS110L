@@ -1,0 +1,43 @@
+Example 1:
+```
+fn main() {
+    let mut s = String::from("hello");
+    let ref1 = &s;
+    let ref2 = &ref1;
+    let ref3 = &ref2;
+    s = String::from("goodbye");
+    println!("{}", ref3.to_uppercase());
+}
+```
+
+If we comment the line 'println!...', it will pass cause we dont'use refs, and then theirs ownership are over
+immediately. 
+But if we use them, there are promblems because '=' needs a mut reference which violates rules of Rust.
+
+
+
+Example 2:
+```
+fn drip_drop() -> &String {
+    let s = String::from("hello world!");
+    return &s;
+}
+```
+
+s is a local variable whose lifetime is short.
+
+
+
+Example 3:
+```
+fn main() {
+    let s1 = String::from("hello");
+    let mut v = Vec::new();
+    v.push(s1);
+    let s2: String = v[0];
+    println!("{}", s2);
+}
+```
+
+cannot move out of index of `Vec<String>`
+
